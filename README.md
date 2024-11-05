@@ -7,6 +7,10 @@ Python version: `3.12.7`
 '5.1.2'
 ```
 
+##### Variáveis ambiente
+Copiar arquivo `local_settings_example.py` para `local_settings.py` na raiz `myblog`
+Em seguida, ajustar conforme ambiente (database, allowed_hosts, debug,...)
+
 ##### Gerar migrations
 ```bash
 python manage.py makemigrations
