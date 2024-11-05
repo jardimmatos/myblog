@@ -1,0 +1,12 @@
+<div id="paginator">
+
+    {% if page.has_previous %}
+    <a class="btn btn-outline-primary btn-sm" href="?page={{page.previous_page_number}}">Postagens anteriores</a>
+    {% endif %}
+
+    Página {{ page.number }} de {{page.paginator.num_pages}}
+
+    {% if page.has_next %}
+    <a class="btn btn-outline-primary btn-sm" href="?page={{page.next_page_number}}">Próximas Postagens</a>
+    {% endif %}
+</div>

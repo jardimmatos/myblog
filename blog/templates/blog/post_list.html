@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} Minhas Postagens {% endblock %}
+
+{% block content %}
+
+<h1>Posts</h1>
+<hr>
+{% for post in posts %}
+    <br>
+    <div class="card">
+        <div class="card-body">
+
+            
+            <span class="fs-4">{{post.title}}</span><br>
+            <small class="fw-bold text-secondary">Publicado em: {{post.created_at}} por {{post.created_by}}</small><br><br>
+            <div>{{post.content|truncatewords:15|linebreaks}}</div>
+            <a class="btn btn-sm btn-outline-secondary" href="{{post.get_absolute_url}}">Acessar <i class="bi bi-box-arrow-up-right"></i></a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{post.get_share_url}}">Compartilhar <i class="bi bi-share-fill"></i></a>
+        </div>
+    </div>
+
+{% endfor %}
+<br>
+{% include 'blog/componentes/paginator.html' with page=page_obj %}
+    
+{% endblock %}

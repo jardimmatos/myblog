@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} {{post.title}} {% endblock %}
+
+{% block content %}
+
+<h2>{{post.title}}</h2>
+<hr>
+<small class="fw-bold text-secondary">Publicado em: {{post.created_at}} por {{post.created_by}}</small>
+<br><br>
+<div>{{post.content}}</div>
+<br>  
+
+<div><a class="btn btn-outline-primary btn-sm" href="{% url 'blog:list' %}">Postagens</a></div>
+{% endblock %}
