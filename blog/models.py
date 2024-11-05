@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from . import enums
+from . import enums, managers
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -15,10 +16,25 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    objects = models.Manager()
+    publicados = managers.PublishedManager()
+
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('blog:detail', args=[
+            self.created_at.year,
+            self.created_at.month,
+            self.created_at.day,
+            self.slug
+        ])
+
+    def get_share_url(self):
+        return reverse('blog:share', args=[self.pk])
+
     class Meta:
-        ordering = ('-published',)
+        ordering = ('-created_at',)
         verbose_name = 'Postagem'
         verbose_name_plural = 'Postagens'
+        default_manager_name = 'objects'
