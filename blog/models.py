@@ -38,3 +38,16 @@ class Post(models.Model):
         verbose_name = 'Postagem'
         verbose_name_plural = 'Postagens'
         default_manager_name = 'objects'
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, null=True)
+    email = models.EmailField()
+    body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.name} comentou no post {self.post}'
+
+    class Meta:
+        ordering = ('-created_at',)
